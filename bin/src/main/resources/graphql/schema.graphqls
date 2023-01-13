@@ -1,0 +1,77 @@
+type Query {
+    getAllCinemas : [Cinema],
+    findCinemaById(id : Int) : Cinema,
+}
+
+type Mutation {
+    addCinema(cinema : CinemaIn) : Cinema
+}
+
+input CinemaIn {
+    name : String,
+    phoneNumber : String,
+    email : String,
+    theaterNumber : Int
+}
+
+
+type Cinema {
+    id : Int,
+    name : String,
+    phoneNumber : String,
+    email : String,
+    theaterNumber : Int,
+    city : City,
+    theaters : [Theater]
+}
+
+type City {
+    id : Int,
+    cityName : String,
+    cinemas : [Cinema]
+}
+
+type Theater {
+    id : Int,
+    theaterName : String,
+    seatsNumber : String,
+    cinema : Cinema,
+    movieProjections : [MovieProjection],
+    seats : [Seat]
+}
+
+type Seat {
+    id : Int,
+    number : Int,
+    theater : Theater,
+    tickets : [Ticket]
+}
+
+type Ticket {
+    id : Int,
+    clientName : String,
+    seat : Seat,
+    projection : MovieProjection
+}
+
+type MovieProjection {
+    id : Int,
+    projectionDate : String,
+    price : Float,
+    movie : Movie,
+    theater : Theater,
+    tickets : [Ticket]
+}
+
+type Movie {
+    id : Int,
+    name : String,
+    category : Category,
+    projections : [MovieProjection]
+}
+
+type Category {
+    id : Int,
+    name : String,
+    movies : [Movie]
+}
